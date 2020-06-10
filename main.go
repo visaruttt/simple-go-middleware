@@ -2,11 +2,10 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"github.com/joho/godotenv"
 	"github.com/valyala/fasthttp"
-
+	"gitlab.com/visaruttirataworawan/grader_gw/router"
 	"os"
 )
 
@@ -22,11 +21,7 @@ func main() {
 	r := router.New()
 	router.Mount(r)
 
-	// Check mongoDB database connection
-	//go model.CheckDatabaseConnection()
-
-	// start the server
-	fmt.Printf("API Service is running at port %v\n", *addr)
+	log.Println("API service listened on port ",*addr)
 	if err := fasthttp.ListenAndServe(*addr, r.Handler); err != nil {
 		log.Fatal(err)
 	}
